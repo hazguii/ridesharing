@@ -1,0 +1,17 @@
+use('rs');
+
+db.rsOfferMatchingRequests.find(
+    {
+            "rsOfferMatchRequestDeparturePoint":{
+                $near: {
+                    $geometry:{
+                        type: "point",
+                        coordinates: [33.232808817045670, 9.370112548607832]
+
+                    },
+                    $maxDistance: 10000,
+                    $minDistance: 0
+                }
+            }
+    }
+    )

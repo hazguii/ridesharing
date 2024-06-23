@@ -1,0 +1,27 @@
+export access_token=$(\
+    curl --insecure -X POST http://localhost:8181/realms/rs-platform/protocol/openid-connect/token \
+    --user rs-backend:OYOCq84clEhD89S5aZuAMU1rwUEqMamq \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=rsadmin&password=azerty&grant_type=password' | jq --raw-output '.access_token' \
+ )
+
+
+rsOffers
+
+curl -v -X GET \
+  http://localhost:8080/rsOffers/listAdmin \
+  -H "Authorization: Bearer "$access_token
+
+
+demands
+
+curl -v -X GET \
+  http://localhost:8090/rsDemands/secretAdmin \
+  -H "Authorization: Bearer "$access_token
+
+export access_token=$(\
+    curl --insecure -X POST http://localhost:8181/realms/rs-platform/protocol/openid-connect/token \
+    --user rs-frontend:F03yj2X6rsB4mufGydk3MWtYnrLvrYOO \
+    -H 'content-type: application/x-www-form-urlencoded' \
+    -d 'username=rsadmin&password=azerty&grant_type=password' | jq --raw-output '.access_token' \
+ )

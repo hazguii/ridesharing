@@ -1,0 +1,34 @@
+ContextMap {
+    contains RSOffersManagement
+    contains RSDemandsManagement
+    contains RSOffersPricing
+    contains RSMatching
+    contains RSReservation
+    contains RSNotification
+	
+	//share value objects to have same types for numberOfPlaces, addresses, dates & locations
+	RSOffersManagement Shared-Kernel RSDemandsManagement
+	//pricing downstream since it depends on the language published by offers ctx
+	//ofers employs  a language that is used within the pricing domain, hence PL
+	//pricing is conformist if it uses the offers events within its domain 
+	RSOffersManagement [PL] Upstream-Downstream [CF] RSOffersPricing
+	//matching uses the offers & demands published language
+	// ACL i suppose since offers & demands types are only handled within the matching application layer and not domain. otherwise conformist 
+	RSOffersManagement [PL] Upstream-Downstream [ACL] RSMatching
+	RSDemandsManagement [PL] Upstream-Downstream [ACL] RSMatching
+	RSMatching [PL] Upstream-Downstream [ACL] RSReservation
+
+	RSOffersManagement [PL] Upstream-Downstream [CF] RSNotification
+	RSDemandsManagement [PL] Upstream-Downstream [CF] RSNotification
+	RSMatching [PL] Upstream-Downstream [CF] RSNotification
+	RSReservation [PL] Upstream-Downstream [CF] RSNotification
+
+}
+
+
+BoundedContext RSOffersManagement
+BoundedContext RSDemandsManagement
+BoundedContext RSOffersPricing
+BoundedContext RSMatching
+BoundedContext RSReservation
+BoundedContext RSNotification
