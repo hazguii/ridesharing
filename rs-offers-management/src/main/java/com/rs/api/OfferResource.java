@@ -34,14 +34,14 @@ public class OfferResource {
     RSOfferRepository offersRepository;
 
     @GET
-    public List<RSOffer> findAll() {
-        return offersRepository.findAll();
+    public List<RsOfferDto> findAll() {
+        return rsOfferService.getAllRsOffers();
     }
     @GET
     @Path("/listAdmin")
-    @RolesAllowed("rs-admin")
-    public List<RSOffer> findAllAdmin() {
-        return offersRepository.findAll();
+    @RolesAllowed("rider")
+    public Response findAllAdmin() {
+        return Response.ok(rsOfferService.getAllRsOffers()).build();
     }
 
     @GET
@@ -57,8 +57,8 @@ public class OfferResource {
 
     @POST
     public RSOfferId createRSOffer(CreateRSOfferDTO dto) throws EntityNotFoundException{
-        return rsOfferService.createRSOffer(new UserId(UUID.randomUUID()), dto.departureAddress(), dto.departureGeoPoint(),
-                                            dto.destinationAddress(), dto.destinationGeoPoint(), dto.availableSeatsNumber(), dto.departureDateTime());
+        return rsOfferService.createRSOffer(new UserId(UUID.randomUUID()), dto.departureAddress(),
+                                            dto.destinationAddress(), dto.availableSeatsNumber(), dto.departureDateTime());
     }
     
     @POST

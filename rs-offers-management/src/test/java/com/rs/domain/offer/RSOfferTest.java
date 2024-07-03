@@ -18,9 +18,7 @@ public class RSOfferTest {
     public void whenARSOfferIsCreatedThenItHasANonNullId()throws EntityNotFoundException{
         RSOffer o = RSOffer.of(new UserId(UUID.randomUUID()),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new NumberOfSeats((short)4),
             LocalDateTime.now()
         );
@@ -31,9 +29,7 @@ public class RSOfferTest {
     public void whenARSOfferIsCreatedThenItIsNotCancelledAndNotPublished()throws EntityNotFoundException{
         RSOffer o = RSOffer.of(new UserId(UUID.randomUUID()),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new NumberOfSeats((short)4),
             LocalDateTime.now()
         );
@@ -45,9 +41,7 @@ public class RSOfferTest {
     public void whenANonCancelledRSOfferIsCancelledThenRaiseEvent()throws EntityNotFoundException{
         RSOffer o = RSOffer.of(new UserId(UUID.randomUUID()),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new NumberOfSeats((short)4),
             LocalDateTime.now()
         );
@@ -58,9 +52,7 @@ public class RSOfferTest {
     public void whenANonCancelledRSOfferIsPublishedThenRaiseEvent()throws EntityNotFoundException{
         RSOffer o = RSOffer.of(new UserId(UUID.randomUUID()),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new Address("city", "street", (short)0, "location"),
-            new GeoPoint((double)0, (double)0),
             new NumberOfSeats((short)4),
             LocalDateTime.now()
         );

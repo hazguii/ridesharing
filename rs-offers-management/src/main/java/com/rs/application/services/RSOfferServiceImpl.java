@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import com.rs.api.dtos.RsOfferDto;
+import com.rs.converter.RsOfferConverter;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 
@@ -42,14 +45,17 @@ public class RSOfferServiceImpl implements RSOfferService {
     @Inject
     @Channel("departuretime-changed")
     Emitter<DepartureTimeChanged> departureTimeChangedEmitter;
+
     @Override
-    public RSOfferId createRSOffer(UserId userId,Address departureAddress, GeoPoint departureGeoPoint, Address destinationAddress, GeoPoint destinationGeoPoint, NumberOfSeats numberOfAvailableSeats, LocalDateTime departureDateTime) throws EntityNotFoundException{
+    public List<RsOfferDto> getAllRsOffers(){
+        return offersRepository.findAll().stream().map(rsOffer -> RsOfferConverter.newInstance().convert(rsOffer)).collect(Collectors.toList());
+    }
+    @Override
+    public RSOfferId createRSOffer(UserId userId,Address departureAddress, Address destinationAddress, NumberOfSeats numberOfAvailableSeats, LocalDateTime departureDateTime) throws EntityNotFoundException{
         RSOffer newOffer = RSOffer.of(
             userId,
             departureAddress,
-            departureGeoPoint,
             destinationAddress,
-            destinationGeoPoint,
             numberOfAvailableSeats,
             departureDateTime
             );

@@ -9,5 +9,5 @@ import com.rs.domain.offer.NumberOfSeats;
 /**
  * CreateOffer
  */
-public record CreateRSOfferDTO(Address departureAddress, GeoPoint departureGeoPoint, Address destinationAddress, GeoPoint destinationGeoPoint, NumberOfSeats availableSeatsNumber, LocalDateTime departureDateTime){
+public record CreateRSOfferDTO(Address departureAddress, Address destinationAddress, NumberOfSeats availableSeatsNumber, LocalDateTime departureDateTime){
 }

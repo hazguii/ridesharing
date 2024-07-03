@@ -16,9 +16,7 @@ public class RSOffer implements AggregateRoot<RSOfferId>{
     private RSOfferId rsOfferId;
     private UserId userId;
     private Address departureAddress;
-    private GeoPoint departureGeoPoint;
     private Address destinationAddress;
-    private GeoPoint destinationGeoPoint;
     private NumberOfSeats numberOfAvailableSeats;
     private LocalDateTime departureDateTime;
     private boolean cancelled=false;
@@ -27,23 +25,21 @@ public class RSOffer implements AggregateRoot<RSOfferId>{
 
 
     @JsonCreator
-    public static RSOffer of(UserId userId, Address departureAddress, GeoPoint departureGeoPoint, Address destinationAddress, GeoPoint destinationGeoPoint,
+    public static RSOffer of(UserId userId, Address departureAddress, Address destinationAddress,
     NumberOfSeats numberOfAvailableSeats, LocalDateTime departureDateTime) throws EntityNotFoundException{
         if(userId== null){
             throw new EntityNotFoundException("cannot create an offer without owner");
         }
-        return new RSOffer(new RSOfferId(), userId, departureAddress, departureGeoPoint, destinationAddress, destinationGeoPoint, numberOfAvailableSeats, departureDateTime,false,false,false);
+        return new RSOffer(new RSOfferId(), userId, departureAddress, destinationAddress, numberOfAvailableSeats, departureDateTime,false,false,false);
     }
     
-    private RSOffer(RSOfferId rsOfferId, UserId userId, Address departureAddress, GeoPoint departureGeoPoint, Address destinationAddress,
-            GeoPoint destinationGeoPoint, NumberOfSeats numberOfAvailableSeats, LocalDateTime departureDateTime, boolean cancelled,
+    private RSOffer(RSOfferId rsOfferId, UserId userId, Address departureAddress, Address destinationAddress,
+             NumberOfSeats numberOfAvailableSeats, LocalDateTime departureDateTime, boolean cancelled,
             boolean published, boolean closed) {
         this.rsOfferId = rsOfferId;
         this.userId = userId;
         this.departureAddress = departureAddress;
-        this.departureGeoPoint = departureGeoPoint;
         this.destinationAddress = destinationAddress;
-        this.destinationGeoPoint = destinationGeoPoint;
         this.numberOfAvailableSeats = numberOfAvailableSeats;
         this.departureDateTime = departureDateTime;
         this.cancelled = cancelled;
@@ -52,13 +48,11 @@ public class RSOffer implements AggregateRoot<RSOfferId>{
     }
 
 
-    private RSOffer(UserId userId, Address departureAddress, GeoPoint departureGeoPoint, Address destinationAddress, GeoPoint destinationGeoPoint,
+    private RSOffer(UserId userId, Address departureAddress, Address destinationAddress,
             NumberOfSeats numberOfAvailableSeats, LocalDateTime departureDateTime) {
         this.userId = userId;
         this.departureAddress = departureAddress;
-        this.departureGeoPoint = departureGeoPoint;
         this.destinationAddress = destinationAddress;
-        this.destinationGeoPoint = destinationGeoPoint;
         this.numberOfAvailableSeats = numberOfAvailableSeats;
         this.departureDateTime = departureDateTime;
     }
@@ -74,7 +68,7 @@ public class RSOffer implements AggregateRoot<RSOfferId>{
     public RSOfferPublished publish() throws CommandRejectedException{
         if(!cancelled){
             published=true;
-            return new RSOfferPublished(rsOfferId, userId, departureGeoPoint, destinationGeoPoint, departureDateTime);
+            return new RSOfferPublished(rsOfferId, userId, departureDateTime);
         }else throw new CommandRejectedException("Cannot publish a cancelled offer" );
     }
     public RSOfferCancelled cancel()throws CommandRejectedException{

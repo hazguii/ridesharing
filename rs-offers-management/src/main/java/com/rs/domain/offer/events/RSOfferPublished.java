@@ -8,9 +8,9 @@ import com.rs.domain.offer.UserId;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public record RSOfferPublished(UUID eventId, LocalDateTime eventTime, RSOfferId rsOfferId, UserId userId, GeoPoint departureGeoPoint, GeoPoint destinationGeoPoint, LocalDateTime departureDateTime) implements DomainEvent {
-    public RSOfferPublished(RSOfferId rsOfferId, UserId userId, GeoPoint departureGeoPoint, GeoPoint destinationGeoPoint, LocalDateTime departureDateTime){
-        this(UUID.randomUUID(),LocalDateTime.now(),rsOfferId, userId, departureGeoPoint, destinationGeoPoint, departureDateTime);
+public record RSOfferPublished(UUID eventId, LocalDateTime eventTime, RSOfferId rsOfferId, UserId userId, LocalDateTime departureDateTime) implements DomainEvent {
+    public RSOfferPublished(RSOfferId rsOfferId, UserId userId, LocalDateTime departureDateTime){
+        this(UUID.randomUUID(),LocalDateTime.now(),rsOfferId, userId, departureDateTime);
     }
     @Override
     public String aggregateId() {
