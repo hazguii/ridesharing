@@ -1,94 +1,85 @@
 package com.rs.api;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.rs.api.dtos.*;
 import com.rs.application.services.RSOfferService;
-import com.rs.domain.offer.RSOffer;
-import com.rs.domain.offer.RSOfferId;
-import com.rs.domain.offer.RSOfferRepository;
 import com.rs.domain.offer.UserId;
 import com.rs.exceptions.CommandRejectedException;
 import com.rs.exceptions.EntityNotFoundException;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 
-
-@Path("/rsOffers")
+@Path("/offers")
 public class OfferResource {
 
     @Inject
-    RSOfferService rsOfferService;
-    
-
-    @Inject
-    RSOfferRepository offersRepository;
+    private RSOfferService rsOfferService;
 
     @GET
+    @RolesAllowed("admin")
     public List<RsOfferDto> findAll() {
         return rsOfferService.getAllRsOffers();
     }
-    @GET
-    @Path("/listAdmin")
-    @RolesAllowed("rider")
-    public Response findAllAdmin() {
-        return Response.ok(rsOfferService.getAllRsOffers()).build();
-    }
 
     @GET
-    @Path("/{rsOfferId}")
-    public Response findById(@PathParam("rsOfferId") UUID id) {
-        Optional<RSOffer> offer = offersRepository.lookup(new RSOfferId(id));
-        if(offer.isPresent()){
-            return Response.accepted(offer.get()).build();
+    @Path("/{id}")
+    @RolesAllowed("admin")
+    public Response findById(@RequestBody GetRsOfferByIdDto getRsOfferById) throws EntityNotFoundException {
+        RsOfferDto rsOfferDto = rsOfferService.getOfferById(getRsOfferById.rsOfferId());
+        if(Objects.nonNull(rsOfferDto)){
+            return Response.accepted(rsOfferDto).build();
         }else{
             return Response.status(Status.NOT_FOUND).build();
         }
     }
 
     @POST
-    public RSOfferId createRSOffer(CreateRSOfferDTO dto) throws EntityNotFoundException{
-        return rsOfferService.createRSOffer(new UserId(UUID.randomUUID()), dto.departureAddress(),
-                                            dto.destinationAddress(), dto.availableSeatsNumber(), dto.departureDateTime());
+    @RolesAllowed("rider")
+    public Response createRSOffer(@RequestBody CreateRSOfferDTO createRSOfferDTO) throws EntityNotFoundException{
+        return Response.ok(rsOfferService.createRSOffer(createRSOfferDTO)).build();
     }
     
-    @POST
+    @PUT
     @Path("/cancel")
-    public void cancelRSOffer(CancelRSOfferDTO dto) throws EntityNotFoundException, CommandRejectedException {
-        rsOfferService.cancelRSOffer(new UserId(UUID.randomUUID()),dto.rsOfferId());
+    @RolesAllowed("rider")
+    public Response cancelRSOffer(@RequestBody CancelRSOfferDTO cancelRSOfferDTO) throws EntityNotFoundException, CommandRejectedException {
+        return Response.ok(rsOfferService.cancelRSOffer(cancelRSOfferDTO.rsOfferId())).build();
     }
 
-    @POST
+    @PUT
     @Path("/publish")
-    public void publishRSOffer(PublishRSOfferDTO dto) throws EntityNotFoundException, CommandRejectedException {
-        rsOfferService.publishRSOffer(new UserId(UUID.randomUUID()),dto.rsOfferId());  
+    @RolesAllowed("rider")
+    public void publishRSOffer(@RequestBody PublishRSOfferDTO dto) throws EntityNotFoundException, CommandRejectedException {
+        rsOfferService.publishRSOffer(dto.rsOfferId());
     }
 
-    @POST
+    @PUT
     @Path("/close")
-    public void closeRSOffer(CloseRSOfferDTO dto) throws EntityNotFoundException, CommandRejectedException {
+    @RolesAllowed("rider")
+    public void closeRSOffer(@RequestBody CloseRSOfferDTO dto) throws EntityNotFoundException, CommandRejectedException {
         rsOfferService.closeRSOffer(dto.rsOfferId());
     }
 
-    @POST
-    @Path("/changeNumberOfAvailableSeats")
-    public void changeNumberOfAvailableSeats(ChangeNumberOfAvailableSeatsDTO dto) throws EntityNotFoundException, CommandRejectedException {
-        rsOfferService.changeNumberOfAvailableSeats(new UserId(UUID.randomUUID()),dto.rsOfferId(),dto.availableSeatsNumber());
+    @PUT
+    @Path("/seats/available/change")
+    @RolesAllowed("rider")
+    public void changeNumberOfAvailableSeats(@RequestBody ChangeNumberOfAvailableSeatsDTO dto) throws EntityNotFoundException, CommandRejectedException {
+        rsOfferService.changeNumberOfAvailableSeats(dto.rsOfferId(),dto.availableSeatsNumber());
     }
 
-    @POST
-    @Path("/changeDepartureTime")
-    public void changeDepartureTime(ChangeDepartureTimeDTO dto) throws EntityNotFoundException, CommandRejectedException {
-        rsOfferService.changeDepartureTime(new UserId(UUID.randomUUID()),dto.rsOfferId(),dto.departureDateTime());
+    @PUT
+    @Path("/departure-time/change")
+    @RolesAllowed("rider")
+    public void changeDepartureTime(@RequestBody ChangeDepartureTimeDTO dto) throws EntityNotFoundException, CommandRejectedException {
+        rsOfferService.changeDepartureTime(dto.rsOfferId(),dto.departureDateTime());
     }
 
 }

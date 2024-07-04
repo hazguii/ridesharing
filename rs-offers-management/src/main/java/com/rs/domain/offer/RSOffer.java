@@ -15,8 +15,8 @@ import lombok.Getter;
 public class RSOffer implements AggregateRoot<RSOfferId>{
     private RSOfferId rsOfferId;
     private UserId userId;
-    private Address departureAddress;
-    private Address destinationAddress;
+    private final Address departureAddress;
+    private final Address destinationAddress;
     private NumberOfSeats numberOfAvailableSeats;
     private LocalDateTime departureDateTime;
     private boolean cancelled=false;
@@ -86,7 +86,6 @@ public class RSOffer implements AggregateRoot<RSOfferId>{
             return new RSOfferClosed(rsOfferId);
         }
         throw new CommandRejectedException("already closed rsoffer with id: "+ rsOfferId);
-
     }
     public NumberOfAvailableSeatsChanged changeNumberOfAvailableSeats(NumberOfSeats numberOfSeats) throws CommandRejectedException{
         if (!cancelled || !closed){

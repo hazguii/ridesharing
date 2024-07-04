@@ -3,9 +3,11 @@ package com.rs.infrastructure;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -31,8 +33,13 @@ public class RSOfferRepositoryImplMongo implements RSOfferRepository{
     @Inject
     private ObjectMapper jsonMapper;
 
+    private MongoCollection<Document> getCollection(){
+        return mongoClient.getDatabase("rs").getCollection("rsOffers");
+    }
+
     @Override
-    public void save(RSOffer rsoffer) {       
+    @Transactional
+    public RSOffer save(RSOffer rsoffer) {
         String json;
         try {
             json = jsonMapper.writeValueAsString(rsoffer);
@@ -41,8 +48,15 @@ public class RSOfferRepositoryImplMongo implements RSOfferRepository{
             Bson filter = Filters.eq("rsOfferId.value", rsoffer.getRsOfferId().value().toString());
             ReplaceOptions options = new ReplaceOptions().upsert(true);
             getCollection().replaceOne(filter,document,options);
+            Document savedDocument = getCollection().find(filter).first();
+            if (savedDocument != null) {
+                return jsonMapper.readValue(savedDocument.toJson(), RSOffer.class);
+            } else {
+                return null;
+            }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -110,8 +124,10 @@ public class RSOfferRepositoryImplMongo implements RSOfferRepository{
         return offers;
     }
 
-    private MongoCollection<Document> getCollection(){
-        return mongoClient.getDatabase("rs").getCollection("rsOffers");
+    @Override
+    public Optional<RSOffer> findById(UUID id) {
+        return Optional.empty();
     }
-    
+
+
 }
