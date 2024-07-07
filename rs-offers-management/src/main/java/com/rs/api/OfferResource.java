@@ -38,7 +38,7 @@ public class OfferResource {
             return Response.accepted(rsOfferDto).build();
         }else{
             return Response.status(Status.NOT_FOUND).build();
-        } // comment 2
+        } // comment 2 3
     }
 
     @POST
