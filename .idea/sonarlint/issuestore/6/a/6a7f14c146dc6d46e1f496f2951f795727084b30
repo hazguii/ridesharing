@@ -1,0 +1,31 @@
+
+š
+java:S1192o"RDefine a constant instead of duplicating this literal "no offer with id " 3 times.(äÿËşÿÿÿÿ8«Ëñ‡2J$e0966d01-9038-4b1f-8336-65245b6cfdf1
+Š
+java:S6813"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ôÔ×ò‡2J$19bc80f6-c7d9-421b-9495-ccfa75ca4749
+Š
+java:S6813!"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ôÔ×ò‡2J$c2163f78-7a68-4493-a113-708f3789a9ed
+Š
+java:S6813%"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ôÔ×ò‡2J$5e06b8c3-b2ef-411d-8fab-efe30084f21f
+Š
+java:S6813)"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ôÔ×ò‡2J$249bf4ea-cbee-43ee-a19c-a6cc235c9331
+Š
+java:S6813-"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ôÔ×ò‡2J$57d42285-0726-4816-85de-ca2a77791940
+Š
+java:S68131"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8õÔ×ò‡2J$059cd8aa-db40-469e-a421-d5f6b001bb5c
+Š
+java:S68135"BRemove this field injection and use constructor injection instead.(Áº–üÿÿÿÿ8ŸËÛò‡2J$70d309a9-4cd7-4a4e-be72-5e12a4fe44c6
+½
+java:S6204;"zReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()' and ensure that the list is unmodified.(Äıëò8­Ëñ‡2J$853bfd3b-fc00-472a-b210-60bb880e0338
+\
+java:S1854N":Remove this useless assignment to local variable "userId".(’¼Ö‰øÿÿÿÿ8òàåó‡2
+M
+java:S1481N"+Remove this unused "userId" local variable.(’¼Ö‰øÿÿÿÿ8òàåó‡2
+\
+java:S1854h":Remove this useless assignment to local variable "userId".(’¼Ö‰øÿÿÿÿ8ôàåó‡2
+M
+java:S1481h"+Remove this unused "userId" local variable.(’¼Ö‰øÿÿÿÿ8ôàåó‡2
+\
+java:S1854u":Remove this useless assignment to local variable "userId".(’¼Ö‰øÿÿÿÿ8õàåó‡2
+M
+java:S1481u"+Remove this unused "userId" local variable.(’¼Ö‰øÿÿÿÿ8õàåó‡2

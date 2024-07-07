@@ -1,0 +1,30 @@
+
+i
+java:S2699'"-Add at least one assertion to this test case.(’ÿµâJ$19c1b6c8-b464-464b-a17a-3dd145e2d287
+n
+java:S2699:"-Add at least one assertion to this test case.(µ¹¾žùÿÿÿÿJ$2994a230-85a4-49bc-b45c-a17f339a4514
+n
+java:S2699K"-Add at least one assertion to this test case.(ë‰‘†ýÿÿÿÿJ$8a998e5a-9489-443a-aa55-b7d9aacb2dab
+_
+java:S5786"Remove this 'public' modifier.(ß¼ï ùÿÿÿÿJ$efbb5367-5778-4f06-9c66-9db437e1b8d3
+|	java:S125."<This block of commented-out lines of code should be removed.(¼è÷ïøÿÿÿÿJ$224a7a18-9c1e-47d7-8805-4f9cbd264514
+|	java:S125A"<This block of commented-out lines of code should be removed.(¼è÷ïøÿÿÿÿJ$683d420d-f94c-44aa-9c9a-cdb4b31a5d23
+|	java:S125R"<This block of commented-out lines of code should be removed.(¼è÷ïøÿÿÿÿJ$ad9e3902-f2aa-4f00-b86c-91af06bcd39c
+~
+java:S1128"=Remove this unused import 'org.junit.jupiter.api.Assertions'.(âŽè¨ùÿÿÿÿJ$61ae8d37-ebe5-4eb5-b938-8ac963c6bf7b
+u
+java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿJ$099b16a3-19fe-4d28-ad15-6216a340b082
+l
+java:S1128"+Remove this unused import 'java.util.UUID'.(ÀãÄ£úÿÿÿÿJ$81ebd62f-8118-4469-9f89-1e89fadb6648
+t
+java:S1128"8Remove this unused import 'com.rs.domain.offer.Address'.(ÊŸæÔJ$09a468e3-629d-408f-9d5a-55bc81c9f8df
+
+java:S1128">Remove this unused import 'com.rs.domain.offer.NumberOfSeats'.(¾„ÏÖúÿÿÿÿJ$4ceedea5-0569-4ed6-a5b6-0ab24aae7ad9
+{
+java:S1128":Remove this unused import 'com.rs.domain.offer.RSOfferId'.(ß¤›¬þÿÿÿÿJ$394ef63f-5ebe-4870-a163-8759b6a61c8c
+x
+java:S1128"7Remove this unused import 'com.rs.domain.offer.UserId'.(³‡«ÃüÿÿÿÿJ$9e0745ab-952d-491a-9266-aae28499f4d2
+‰
+java:S1128"MRemove this unused import 'org.apache.kafka.clients.consumer.ConsumerRecord'.(±’–„J$691f9b2a-8e27-4d9d-bc00-9aabc69af707
+™
+java:S1128"XRemove this unused import 'io.smallrye.reactive.messaging.kafka.companion.ConsumerTask'.(Ì‰¾ýüÿÿÿÿJ$dfe7672f-29d3-44e6-975d-1d6f66459328
